@@ -3,11 +3,11 @@ RelayCommand which manages the visibility of the command.
 
 If working with C# MVVM you surely already used a RelayCommand, e.g. the implementation from the [CommunityToolkit](https://github.com/MicrosoftDocs/CommunityToolkit/blob/main/docs/mvvm/RelayCommand.md). The RelayCommand can update the `Enabled` state of the XAML components automatically if they have a binding to the command. What if we could do the same with the `Visibility` of the components?
 
-This repository is about a single class [VisibilityRelayCommand.cs](VisibilityRelayCommandDemo/VisibilityRelayCommandDemo/VisibilityRelayCommand.cs) which offers an additional `Visibility` property and handles the notification automatically, so you don't need to add an extra "IsRunCommandVisible" property the ViewModel.
+This repository is about a single class [VisibilityRelayCommand.cs](VisibilityRelayCommandDemo/VisibilityRelayCommandDemo/VisibilityRelayCommand.cs) which offers an additional `Visibility` property and handles the notification automatically, so you don't need to add an extra "IsMyCommandVisible" property the ViewModel.
 
 ## Usage
 
-In the *.xaml view bind the command as usual, but also bind the Visibility property to the commands Visibility property. Note that there is no need for the `BooleanToVisibilityConverter`.
+In the *.xaml view bind the command as usual, but also bind the Visibility property to the commands Visibility property. Note that there is no need for the `BooleanToVisibilityConverter` just bind directly.
 
 ```Xml
 <Button
