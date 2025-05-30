@@ -3,6 +3,7 @@
 // license. If a copy of the license was not distributed with this
 // file, you can obtain one at https://opensource.org/license/mit .
 
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -27,11 +28,19 @@ namespace Sto
 	}
 
 	/// <summary>
-	/// A command whose sole purpose is to relay its functionality to other
-	/// objects by invoking delegates. The default return value for the <see cref="CanExecute"/>
-	/// method is <see langword="true"/>. This type does not allow you to accept command parameters
-	/// in the <see cref="Execute"/> and <see cref="CanExecute"/> callback methods.
+	/// A command whose sole purpose is to relay its functionality to other objects by invoking delegates.
+	/// Additionally to common RelayCommands, this implementation not only handles the "Enabled" state, but
+	/// also the "Visibility" state of the controls, with have a binding to the command.
+	/// <example>
+	/// Command="{Binding RunCommand}"
+	/// Visibility="{Binding RunCommand.Visibility}"
+	/// </example>
 	/// </summary>
+	/// <remarks>
+	/// This implementation automatically notifies the XAML components about the "visibility"
+	/// of the command. This is done by hijacking the <see cref="ICommand.CanExecute(object)"/>
+	/// call, to not only get the "Enabled" state but also the "Visibility" state.
+	/// </remarks>
 	public class VisibilityRelayCommand : IVisibilityRelayCommand
 	{
 		private readonly Action<object?> _execute;
